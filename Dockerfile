@@ -13,3 +13,7 @@ FROM alpine
 WORKDIR /plugins
 
 COPY --from=builder /tmp/* ./
+
+RUN mkdir -p /tmp/scripts
+
+COPY install_plugins.sh /tmp/scripts/
