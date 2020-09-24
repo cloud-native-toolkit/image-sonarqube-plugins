@@ -1,0 +1,27 @@
+name: Publish chart
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      
+      - name: Update version
+        run: |
+          VERSION_TAG=$(echo ${{ github.event.release.tag_name }} | sed -E "s/v//g")
+
+          cat chart/sonarqube-plugins/Chart.yaml | sed -E "s/version: .*/version: ${VERSION_TAG}/g" | sed -E "s/appVersion: .*/appVersion: ${VERSION_TAG}/g" > chart/sonarqube-plugins/Chart.yaml.tmp
+          cp chart/sonarqube-plugins/Chart.yaml.tmp chart/sonarqube-plugins/Chart.yaml && rm chart/sonarqube-plugins/Chart.yaml.tmp
+      
+      - name: Publish Helm charts
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
