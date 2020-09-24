@@ -8,12 +8,8 @@ RUN cat plugins.txt | \
     xargs -n 1 -P 8 wget --no-check-certificate --no-verbose && \
     rm plugins.txt
 
-FROM alpine
+FROM bitnami/nginx
 
-WORKDIR /plugins
+WORKDIR /app
 
 COPY --from=builder /tmp/* ./
-
-RUN mkdir -p /tmp/scripts
-
-COPY install_plugins.sh /tmp/scripts/
