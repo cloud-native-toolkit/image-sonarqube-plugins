@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  sonarqube-plugins:
+  - apiVersion: v2
+    appVersion: 1.2.2
+    created: "2020-09-24T06:27:41.474267347Z"
+    description: A Helm chart for Kubernetes
+    digest: 5768082e4b2cf08c1382ac69fbae038bef2f5473ecce8ea3cbd0621fd579f8d9
+    name: sonarqube-plugins
+    type: application
+    urls:
+    - https://ibm-garage-cloud.github.io/image-sonarqube-plugins/sonarqube-plugins-1.2.2.tgz
+    version: 1.2.2
+generated: "2020-09-24T06:27:41.473585346Z"
